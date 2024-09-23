@@ -25,6 +25,7 @@ namespace WebBrowser
     public sealed partial class MainPage : Page
     {
         private List<Uri> favorites = new List<Uri>();
+        //private List<String> removeFav = new List<String>();
         public String prevURL = "";
         public Uri uri = new System.Uri("https://google.com");
         public MainPage()
@@ -72,6 +73,7 @@ namespace WebBrowser
                 if (!favorites.Contains(currentUri))
                 {
                     favorites.Add(currentUri);
+                    //removeFav.Add("Remove");
                     CreateFavoriteButton(currentUri);
                 }
             }
@@ -84,13 +86,32 @@ namespace WebBrowser
             //display.Substring(display.IndexOf(:/
             Button favoriteButton = new Button
             {
-                
                 Content = uri.AbsoluteUri,
                 Tag = uri
             };
+
+            
             favoriteButton.Click += FavoriteButton_Click;
 
+            Button removeButton = new Button
+            {
+                Content = "Remove",
+                Tag = uri
+            };
+
+            removeButton.Click += (s, e) =>
+            {
+                FavoritesStack.Children.Remove(favoriteButton);
+                RemoveStack.Children.Remove(removeButton);
+                favorites.Remove(uri);
+                //removeFav.Remove("Remove");
+            };
+
             FavoritesStack.Children.Add(favoriteButton);
+            RemoveStack.Children.Add(removeButton);
+            
+            
+
         }
 
         private void FavoriteButton_Click(object sender, RoutedEventArgs e)
@@ -101,10 +122,6 @@ namespace WebBrowser
             }
         }
 
-        private void EditFavorite_Click(object sender, RoutedEventArgs e)
-        {
-            //When the user clicks on a favorite, they can change the name
-            //They should also be able to delete the favorite
-        }
+
     }
 }

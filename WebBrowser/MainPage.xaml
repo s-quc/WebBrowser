@@ -1,26 +1,25 @@
 ﻿<Page
-    x:Class="WebBrowser.MainPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:WebBrowser"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+   x:Class="WebBrowser.MainPage"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:local="using:WebBrowser"
+   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+   mc:Ignorable="d"
+   Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="233*"/>
-            <ColumnDefinition Width="517*"/>
+            <ColumnDefinition Width="938*"/>
+            <ColumnDefinition Width="42*"/>
+            <ColumnDefinition Width="521*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnHome" Content="Home" Margin="30,45,0,0" VerticalAlignment="Top" Click="Button_Click" Width="71"/>
-        <WebView x:Name="wvMain" Margin="0,123,632,0" LoadCompleted="WebView_LoadCompleted" Grid.ColumnSpan="2"/>
-        <Button x:Name="bBack" Content="Back" Margin="0,45,0,0" VerticalAlignment="Top" Width="71" HorizontalAlignment="Center" Click="bBack_Click"/>
-        <Button x:Name="bForward" Content="Forward" Margin="316,45,0,0" VerticalAlignment="Top" Click="bForward_Click"/>
-        <Button x:Name="addFav" Grid.Column="1" Content="Add as Favorite" Margin="0,45,0,0" VerticalAlignment="Top" Click="Button_Click_1" HorizontalAlignment="Center"/>
-        <StackPanel x:Name="FavoritesStack" Grid.Column="1" Margin="434,204,250,26"/>
-        <Button x:Name="EditFavorite" Grid.Column="1" Content="Edit Favorites" Margin="556,167,0,0" VerticalAlignment="Top" Click="EditFavorite_Click"/>
-
+        <Button x:Name="btnHome" Content="Home" Margin="30,45,0,0" VerticalAlignment="Top" Click="Button_Click" Width="71" Height="32"/>
+        <WebView x:Name="wvMain" Margin="0,123,55,0" LoadCompleted="WebView_LoadCompleted"/>
+        <Button x:Name="bBack" Content="Back" Margin="204,45,0,0" VerticalAlignment="Top" Width="71" Click="bBack_Click" Height="32"/>
+        <Button x:Name="bForward" Content="Forward" Margin="316,45,0,0" VerticalAlignment="Top" Click="bForward_Click" Height="32" Width="75"/>
+        <Button x:Name="addFav" Grid.Column="2" Content="Add as Favorite" Margin="180,45,0,0" VerticalAlignment="Top" Click="Button_Click_1" Height="32" Width="119"/>
+        <StackPanel x:Name="FavoritesStack" Grid.Column="2" Margin="261,143,24,0" Orientation="Vertical"/>
+        <StackPanel x:Name="RemoveStack" Grid.Column="2" Margin="77,143,265,0" Orientation="Vertical"/>
     </Grid>
 </Page>

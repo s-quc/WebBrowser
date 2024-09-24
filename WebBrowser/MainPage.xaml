@@ -8,16 +8,16 @@
    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
    mc:Ignorable="d"
    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid>
+    <Grid Background="#FFFFEF41">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="938*"/>
             <ColumnDefinition Width="42*"/>
             <ColumnDefinition Width="521*"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="btnHome" Content="Home" Margin="30,45,0,0" VerticalAlignment="Top" Click="Button_Click" Width="71" Height="32"/>
-        <WebView x:Name="wvMain" Margin="0,123,55,0" LoadCompleted="WebView_LoadCompleted"/>
+        <controls:WebView2 x:Name="wvMain" Source="https://google.com" Margin="0,105,0,0"></controls:WebView2>
         <Button x:Name="bBack" Content="Back" Margin="204,45,0,0" VerticalAlignment="Top" Width="71" Click="bBack_Click" Height="32"/>
-        <Button x:Name="bForward" Content="Forward" Margin="316,45,0,0" VerticalAlignment="Top" Click="bForward_Click" Height="32" Width="75"/>
+        <Button x:Name="bForward" Content="Forward" Margin="316,45,0,0" VerticalAlignment="Top" Click="bForward_Click" Height="32" Width="75" Background="#FF583F14"/>
         <Button x:Name="addFav" Grid.Column="2" Content="Add as Favorite" Margin="180,45,0,0" VerticalAlignment="Top" Click="Button_Click_1" Height="32" Width="119"/>
         <StackPanel x:Name="FavoritesStack" Grid.Column="2" Margin="261,143,24,0" Orientation="Vertical"/>
         <StackPanel x:Name="RemoveStack" Grid.Column="2" Margin="77,143,265,0" Orientation="Vertical"/>

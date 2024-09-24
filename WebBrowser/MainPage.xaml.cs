@@ -41,7 +41,7 @@ namespace WebBrowser
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //wvMain.Navigate(uri);
-            wvMain.Navigate(new Uri("https://google.com"));
+            wvMain.Source = (new Uri("https://google.com"));
         }
 
         private void bBack_Click(object sender, RoutedEventArgs e)
@@ -118,7 +118,7 @@ namespace WebBrowser
         {
             if (sender is Button button && button.Tag is Uri uri)
             {
-                wvMain.Navigate(uri);
+                wvMain.Source = uri;
             }
         }
 

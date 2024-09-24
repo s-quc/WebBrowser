@@ -28,15 +28,18 @@ namespace WebBrowser
         //private List<String> removeFav = new List<String>();
         public String prevURL = "";
         public Uri uri = new System.Uri("https://google.com");
+
+        DispatcherTimer dtTime;
+        DispatcherTimer dt = new DispatcherTimer();
         public MainPage()
         {
             this.InitializeComponent();
         }
 
-        private void WebView_LoadCompleted(object sender, NavigationEventArgs e)
+        /*private void WebView_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            prevURL = uri.AbsoluteUri;
-        }
+            //prevURL = uri.AbsoluteUri;
+        }*/
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -105,7 +108,7 @@ namespace WebBrowser
                 RemoveStack.Children.Remove(removeButton);
                 favorites.Remove(uri);
                 //removeFav.Remove("Remove");
-            };
+            };      
 
             FavoritesStack.Children.Add(favoriteButton);
             RemoveStack.Children.Add(removeButton);

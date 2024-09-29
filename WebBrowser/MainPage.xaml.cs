@@ -12,6 +12,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.Web.WebView2.Core;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -25,15 +28,63 @@ namespace WebBrowser
     public sealed partial class MainPage : Page
     {
         private List<Uri> favorites = new List<Uri>();
+        public List<Uri> history = new List<Uri>();
         //private List<String> removeFav = new List<String>();
         public String prevURL = "";
         public Uri uri = new System.Uri("https://google.com");
 
-        DispatcherTimer dtTime;
         DispatcherTimer dt = new DispatcherTimer();
         public MainPage()
         {
             this.InitializeComponent();
+
+            dt = new DispatcherTimer();
+            dt.Interval = TimeSpan.FromSeconds(1);
+            dt.Tick += UpdateCurrentTime;
+            dt.Start();
+
+            InitializeWebView();
+        }
+
+        private async void InitializeWebView()
+        {
+            await wvMain.EnsureCoreWebView2Async();
+            wvMain.CoreWebView2.NavigationCompleted += WvMain_NavigationCompleted;
+        }
+
+        private void WvMain_NavigationCompleted(CoreWebView2 sender, CoreWebView2NavigationCompletedEventArgs args)
+        {
+            if (args.IsSuccess)
+            {
+                Uri currentUri = new Uri(sender.Source);
+                if (!history.Contains(currentUri))
+                {
+                    history.Insert(0, currentUri);
+                    CreateHistoryButton(currentUri);
+                }
+            }
+        }
+        private void CreateHistoryButton(Uri uri)
+        {
+            Button historyPage = new Button
+            {
+                Content = uri.AbsoluteUri,
+                Tag = uri
+            };
+
+            historyPage.Click += (s, e) =>
+            {
+                wvMain.Source = uri;
+            };
+
+            spHistory.Children.Insert(0, historyPage);
+        }
+
+       
+
+        private void UpdateCurrentTime(object sender, object e)
+        {
+            tbTime.Text = DateTime.Now.ToString("hh:mm:ss tt");
         }
 
         /*private void WebView_LoadCompleted(object sender, NavigationEventArgs e)
@@ -125,6 +176,10 @@ namespace WebBrowser
             }
         }
 
-
+        private void bRefreshHist_Click(object sender, RoutedEventArgs e)
+        {
+            spHistory.Children.Clear();
+            history.Clear();
+        }
     }
 }

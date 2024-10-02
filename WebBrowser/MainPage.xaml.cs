@@ -66,9 +66,37 @@ namespace WebBrowser
         }
         private void CreateHistoryButton(Uri uri)
         {
+            string content = uri.AbsoluteUri;
+
+            if (content.IndexOf(".com") != -1) 
+            {
+                content = content.Substring(0, content.IndexOf(".com")+4);
+                content = content.Substring(12);
+            }
+            else if (content.IndexOf(".org") != -1)
+            {
+                content = content.Substring(0, content.IndexOf(".org")+4);
+                content = content.Substring(12);
+            }
+            else if (content.IndexOf(".gov") != -1)
+            {
+                content = content.Substring(0, content.IndexOf(".gov")+4);
+                content = content.Substring(12);
+            }
+            else if (content.IndexOf(".net") != -1)
+            {
+                content = content.Substring(0, content.IndexOf(".net")+4);
+                content = content.Substring(12);
+            }
+            else if (content.IndexOf(".edu") != -1)
+            {
+                content = content.Substring(0, content.IndexOf(".edu")+4);
+                content = content.Substring(12);
+            }
+           
             Button historyPage = new Button
             {
-                Content = uri.AbsoluteUri,
+                Content = content,
                 Tag = uri
             };
 
@@ -138,9 +166,38 @@ namespace WebBrowser
         {
             //String display = uri.AbsoluteUri;
             //display.Substring(display.IndexOf(:/
+
+            string content = uri.AbsoluteUri;
+
+            if (content.IndexOf(".com") != -1)
+            {
+                content = content.Substring(0, content.IndexOf(".com") + 4);
+                content = content.Substring(12);
+            }
+            else if (content.IndexOf(".org") != -1)
+            {
+                content = content.Substring(0, content.IndexOf(".org") + 4);
+                content = content.Substring(12);
+            }
+            else if (content.IndexOf(".gov") != -1)
+            {
+                content = content.Substring(0, content.IndexOf(".gov") + 4);
+                content = content.Substring(12);
+            }
+            else if (content.IndexOf(".net") != -1)
+            {
+                content = content.Substring(0, content.IndexOf(".net") + 4);
+                content = content.Substring(12);
+            }
+            else if (content.IndexOf(".edu") != -1)
+            {
+                content = content.Substring(0, content.IndexOf(".edu") + 4);
+                content = content.Substring(12);
+            }
+
             Button favoriteButton = new Button
             {
-                Content = uri.AbsoluteUri,
+                Content = content,
                 Tag = uri
             };
 

@@ -53,10 +53,10 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <StackPanel x:Name="FavoritesStack" Grid.Column="2" Margin="261,143,191,0" Orientation="Vertical"/>
-        <StackPanel x:Name="RemoveStack" Grid.Column="2" Margin="163,143,265,0" Orientation="Vertical"/>
+        <StackPanel x:Name="FavoritesStack" Grid.Column="2" Margin="313,143,139,0" Orientation="Vertical"/>
+        <StackPanel x:Name="RemoveStack" Grid.Column="2" Margin="220,143,208,0" Orientation="Vertical"/>
         <TextBlock x:Name="tbTime" Grid.Column="2" HorizontalAlignment="Left" Margin="10,45,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="24" FocusVisualPrimaryBrush="#E4DC4F4F"/>
-        <StackPanel x:Name="spHistory" Grid.Column="2" Margin="20,143,403,-105"/>
+        <StackPanel x:Name="spHistory" Grid.Column="2" Margin="20,143,403,0"/>
         <Button x:Name="bRefreshHist" Grid.Column="2" Content="Refresh History" Margin="10,99,0,0" VerticalAlignment="Top" Click="bRefreshHist_Click"/>
     </Grid>
 </Page>

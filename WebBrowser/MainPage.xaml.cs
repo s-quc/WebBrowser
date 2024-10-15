@@ -238,5 +238,14 @@ namespace WebBrowser
             spHistory.Children.Clear();
             history.Clear();
         }
+
+       
+
+        private void SearchBar_KeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            String text = SearchBar.Text;
+
+            text = 
+        }
     }
 }

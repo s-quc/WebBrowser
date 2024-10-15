@@ -20,7 +20,7 @@
             <ColumnDefinition Width="42*"/>
             <ColumnDefinition Width="521*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnHome" Content="Home" Margin="30,45,0,0" VerticalAlignment="Top" Click="Button_Click" Width="71" Height="32">
+        <Button x:Name="btnHome" Content="Home" Margin="18,10,0,0" VerticalAlignment="Top" Click="Button_Click" Width="71" Height="32">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF34CE99"/>
@@ -29,7 +29,7 @@
             </Button.Background>
         </Button>
         <controls:WebView2 x:Name="wvMain" Source="https://google.com" Margin="0,105,0,0"></controls:WebView2>
-        <Button x:Name="bBack" Content="Back" Margin="204,45,0,0" VerticalAlignment="Top" Width="71" Click="bBack_Click" Height="32">
+        <Button x:Name="bBack" Content="Back" Margin="18,56,0,0" VerticalAlignment="Top" Width="71" Click="bBack_Click" Height="32">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF34CE99"/>
@@ -37,7 +37,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="bForward" Content="Forward" Margin="316,45,0,0" VerticalAlignment="Top" Click="bForward_Click" Height="32" Width="75">
+        <Button x:Name="bForward" Content="Forward" Margin="111,56,0,0" VerticalAlignment="Top" Click="bForward_Click" Height="32" Width="75">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF34CE99" Offset="0"/>
@@ -58,5 +58,6 @@
         <TextBlock x:Name="tbTime" Grid.Column="2" HorizontalAlignment="Left" Margin="10,45,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="24" FocusVisualPrimaryBrush="#E4DC4F4F"/>
         <StackPanel x:Name="spHistory" Grid.Column="2" Margin="20,143,403,0"/>
         <Button x:Name="bRefreshHist" Grid.Column="2" Content="Refresh History" Margin="10,99,0,0" VerticalAlignment="Top" Click="bRefreshHist_Click"/>
+        <TextBox x:Name="SearchBar" HorizontalAlignment="Left" Margin="218,26,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="622" TextChanged="TextBox_TextChanged" KeyUp="SearchBar_KeyUp"/>
     </Grid>
 </Page>

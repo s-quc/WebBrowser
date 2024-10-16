@@ -245,7 +245,16 @@ namespace WebBrowser
         {
             String text = SearchBar.Text;
 
-            text = 
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                //wvMain.Source = new Uri(text);
+                wvMain.NavigateToString(text);
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, KeyRoutedEventArgs e) 
+        { 
+        
         }
     }
 }

@@ -58,6 +58,6 @@
         <TextBlock x:Name="tbTime" Grid.Column="2" HorizontalAlignment="Left" Margin="10,45,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="24" FocusVisualPrimaryBrush="#E4DC4F4F"/>
         <StackPanel x:Name="spHistory" Grid.Column="2" Margin="20,143,403,0"/>
         <Button x:Name="bRefreshHist" Grid.Column="2" Content="Refresh History" Margin="10,99,0,0" VerticalAlignment="Top" Click="bRefreshHist_Click"/>
-        <TextBox x:Name="SearchBar" HorizontalAlignment="Left" Margin="218,26,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="622" TextChanged="TextBox_TextChanged" KeyUp="SearchBar_KeyUp"/>
+        <TextBox x:Name="SearchBar" HorizontalAlignment="Left" Margin="218,26,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="622" TextChanged="SearchBar_TextChanged" KeyUp="SearchBar_KeyUp"/>
     </Grid>
 </Page>

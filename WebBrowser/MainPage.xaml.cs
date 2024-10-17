@@ -243,16 +243,37 @@ namespace WebBrowser
 
         private void SearchBar_KeyUp(object sender, KeyRoutedEventArgs e)
         {
-            String text = SearchBar.Text;
-
+            String text = SearchBar.Text.Trim();
             if (e.Key == Windows.System.VirtualKey.Enter)
             {
-                //wvMain.Source = new Uri(text);
-                wvMain.NavigateToString(text);
+
+                if (!text.StartsWith("https://"))
+                {
+                    string googleSearchUrl = "https://www.google.com/search?q=" + Uri.EscapeDataString(text);
+                    wvMain.Source = new Uri(googleSearchUrl);
+                }
+                else 
+                {
+                    try
+                    {
+                        wvMain.Source = new Uri(text);
+                    }
+                    catch (Exception ex)
+                    {
+                        text = text.Substring(8);
+                        string googleSearchUrl = "https://www.google.com/search?q=" + Uri.EscapeDataString(text);
+                        wvMain.Source = new Uri(googleSearchUrl);
+                    }
+                }
+                SearchBar.Text = "";
             }
+
+
+
+
         }
 
-        private void TextBox_TextChanged(object sender, KeyRoutedEventArgs e) 
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e) 
         { 
         
         }

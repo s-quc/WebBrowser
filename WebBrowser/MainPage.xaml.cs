@@ -32,6 +32,7 @@ namespace WebBrowser
         //private List<String> removeFav = new List<String>();
         public String prevURL = "";
         public Uri uri = new System.Uri("https://google.com");
+        public String prevText = "";
 
         DispatcherTimer dt = new DispatcherTimer();
         public MainPage()
@@ -265,6 +266,7 @@ namespace WebBrowser
                         wvMain.Source = new Uri(googleSearchUrl);
                     }
                 }
+                prevText = SearchBar.Text;
                 SearchBar.Text = "";
             }
 
@@ -276,6 +278,34 @@ namespace WebBrowser
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e) 
         { 
         
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            //refresh button
+            if (!prevText.StartsWith("https://"))
+            {
+                string googleSearchUrl = "https://www.google.com/search?q=" + Uri.EscapeDataString(prevText);
+                wvMain.Source = new Uri(googleSearchUrl);
+            }
+            else
+            {
+                try
+                {
+                    wvMain.Source = new Uri(prevText);
+                }
+                catch (Exception ex)
+                {
+                    prevText = prevText.Substring(8);
+                    string googleSearchUrl = "https://www.google.com/search?q=" + Uri.EscapeDataString(prevText);
+                    wvMain.Source = new Uri(googleSearchUrl);
+                }
+            }
+        }
+
+        private void RevertText_Click(object sender, RoutedEventArgs e)
+        {
+            SearchBar.Text = prevText;
         }
     }
 }

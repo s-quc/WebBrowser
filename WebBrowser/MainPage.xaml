@@ -20,16 +20,16 @@
             <ColumnDefinition Width="42*"/>
             <ColumnDefinition Width="521*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btnHome" Content="Home" Margin="18,10,0,0" VerticalAlignment="Top" Click="Button_Click" Width="71" Height="32">
+        <Button x:Name="btnHome" Content="Home" Margin="18,21,0,0" VerticalAlignment="Top" Click="Button_Click" Width="71" Height="32">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF34CE99"/>
+                    <GradientStop Color="#FF3468CE"/>
                     <GradientStop Color="White" Offset="1"/>
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
         <controls:WebView2 x:Name="wvMain" Source="https://google.com" Margin="0,105,0,0"></controls:WebView2>
-        <Button x:Name="bBack" Content="Back" Margin="18,56,0,0" VerticalAlignment="Top" Width="71" Click="bBack_Click" Height="32">
+        <Button x:Name="bBack" Content="Back" Margin="18,61,0,0" VerticalAlignment="Top" Width="71" Click="bBack_Click" Height="32">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF34CE99"/>
@@ -37,7 +37,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="bForward" Content="Forward" Margin="111,56,0,0" VerticalAlignment="Top" Click="bForward_Click" Height="32" Width="75">
+        <Button x:Name="bForward" Content="Forward" Margin="111,61,0,0" VerticalAlignment="Top" Click="bForward_Click" Height="32" Width="75">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF34CE99" Offset="0"/>
@@ -58,6 +58,22 @@
         <TextBlock x:Name="tbTime" Grid.Column="2" HorizontalAlignment="Left" Margin="10,45,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="24" FocusVisualPrimaryBrush="#E4DC4F4F"/>
         <StackPanel x:Name="spHistory" Grid.Column="2" Margin="20,143,403,0"/>
         <Button x:Name="bRefreshHist" Grid.Column="2" Content="Refresh History" Margin="10,99,0,0" VerticalAlignment="Top" Click="bRefreshHist_Click"/>
-        <TextBox x:Name="SearchBar" HorizontalAlignment="Left" Margin="218,26,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="622" TextChanged="SearchBar_TextChanged" KeyUp="SearchBar_KeyUp"/>
+        <TextBox x:Name="SearchBar" HorizontalAlignment="Left" Margin="505,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="622" TextChanged="SearchBar_TextChanged" KeyUp="SearchBar_KeyUp" Grid.ColumnSpan="3"/>
+        <Button x:Name="Refresh" Content="Refresh" Margin="387,26,0,0" VerticalAlignment="Top" Click="Button_Click_2">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3ACF9C"/>
+                    <GradientStop Color="#FFF9FEFC" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="RevertText" Content="Revert Text" Margin="278,26,0,0" VerticalAlignment="Top" Click="RevertText_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3ACF9C"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Page>

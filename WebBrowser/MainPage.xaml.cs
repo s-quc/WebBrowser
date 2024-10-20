@@ -68,31 +68,41 @@ namespace WebBrowser
         private void CreateHistoryButton(Uri uri)
         {
             string content = uri.AbsoluteUri;
-
-            if (content.IndexOf(".com") != -1) 
+            if (content.Contains("https://www.google.com/search?q="))
             {
-                content = content.Substring(0, content.IndexOf(".com")+4);
-                content = content.Substring(12);
+                content = content.Substring(13) + prevText;
+                if (content.Length > 30) 
+                {
+                    content = content.Substring(0, 30);
+                }
             }
-            else if (content.IndexOf(".org") != -1)
+            else 
             {
-                content = content.Substring(0, content.IndexOf(".org")+4);
-                content = content.Substring(12);
-            }
-            else if (content.IndexOf(".gov") != -1)
-            {
-                content = content.Substring(0, content.IndexOf(".gov")+4);
-                content = content.Substring(12);
-            }
-            else if (content.IndexOf(".net") != -1)
-            {
-                content = content.Substring(0, content.IndexOf(".net")+4);
-                content = content.Substring(12);
-            }
-            else if (content.IndexOf(".edu") != -1)
-            {
-                content = content.Substring(0, content.IndexOf(".edu")+4);
-                content = content.Substring(12);
+                if (content.IndexOf(".com") != -1)
+                {
+                    content = content.Substring(0, content.IndexOf(".com") + 4);
+                    content = content.Substring(12);
+                }
+                else if (content.IndexOf(".org") != -1)
+                {
+                    content = content.Substring(0, content.IndexOf(".org") + 4);
+                    content = content.Substring(12);
+                }
+                else if (content.IndexOf(".gov") != -1)
+                {
+                    content = content.Substring(0, content.IndexOf(".gov") + 4);
+                    content = content.Substring(12);
+                }
+                else if (content.IndexOf(".net") != -1)
+                {
+                    content = content.Substring(0, content.IndexOf(".net") + 4);
+                    content = content.Substring(12);
+                }
+                else if (content.IndexOf(".edu") != -1)
+                {
+                    content = content.Substring(0, content.IndexOf(".edu") + 4);
+                    content = content.Substring(12);
+                }
             }
            
             Button historyPage = new Button
@@ -170,32 +180,45 @@ namespace WebBrowser
 
             string content = uri.AbsoluteUri;
 
-            if (content.IndexOf(".com") != -1)
+            if (content.Contains("https://www.google.com/search?q="))
             {
-                content = content.Substring(0, content.IndexOf(".com") + 4);
-                content = content.Substring(12);
+                content = content.Substring(13) + prevText;
+                if (content.Length > 30)
+                {
+                    content = content.Substring(0, 30);
+                }
             }
-            else if (content.IndexOf(".org") != -1)
+            else
             {
-                content = content.Substring(0, content.IndexOf(".org") + 4);
-                content = content.Substring(12);
-            }
-            else if (content.IndexOf(".gov") != -1)
-            {
-                content = content.Substring(0, content.IndexOf(".gov") + 4);
-                content = content.Substring(12);
-            }
-            else if (content.IndexOf(".net") != -1)
-            {
-                content = content.Substring(0, content.IndexOf(".net") + 4);
-                content = content.Substring(12);
-            }
-            else if (content.IndexOf(".edu") != -1)
-            {
-                content = content.Substring(0, content.IndexOf(".edu") + 4);
-                content = content.Substring(12);
+                if (content.IndexOf(".com") != -1)
+                {
+                    content = content.Substring(0, content.IndexOf(".com") + 4);
+                    content = content.Substring(12);
+                }
+                else if (content.IndexOf(".org") != -1)
+                {
+                    content = content.Substring(0, content.IndexOf(".org") + 4);
+                    content = content.Substring(12);
+                }
+                else if (content.IndexOf(".gov") != -1)
+                {
+                    content = content.Substring(0, content.IndexOf(".gov") + 4);
+                    content = content.Substring(12);
+                }
+                else if (content.IndexOf(".net") != -1)
+                {
+                    content = content.Substring(0, content.IndexOf(".net") + 4);
+                    content = content.Substring(12);
+                }
+                else if (content.IndexOf(".edu") != -1)
+                {
+                    content = content.Substring(0, content.IndexOf(".edu") + 4);
+                    content = content.Substring(12);
+                }
             }
 
+            
+            
             Button favoriteButton = new Button
             {
                 Content = content,

@@ -70,7 +70,7 @@ namespace WebBrowser
             string content = uri.AbsoluteUri;
             if (content.Contains("https://www.google.com/search?q="))
             {
-                content = content.Substring(13) + prevText;
+                content = "google.com/" + prevText;
                 if (content.Length > 30) 
                 {
                     content = content.Substring(0, 30);
@@ -182,7 +182,7 @@ namespace WebBrowser
 
             if (content.Contains("https://www.google.com/search?q="))
             {
-                content = content.Substring(13) + prevText;
+                content = "google.com/" + prevText;
                 if (content.Length > 30)
                 {
                     content = content.Substring(0, 30);

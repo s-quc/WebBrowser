@@ -33,6 +33,7 @@ namespace WebBrowser
         public String prevURL = "";
         public Uri uri = new System.Uri("https://google.com");
         public String prevText = "";
+        public String space = "                                                                        ";
 
         DispatcherTimer dt = new DispatcherTimer();
         public MainPage()
@@ -71,9 +72,14 @@ namespace WebBrowser
             if (content.Contains("https://www.google.com/search?q="))
             {
                 content = "google.com/" + prevText;
-                if (content.Length > 30) 
+                if (content.Length > 30)
                 {
                     content = content.Substring(0, 30);
+                }
+                else 
+                {
+                    int needed = 30 - content.Length;
+                    content = content + space.Substring(0, needed);
                 }
             }
             else 
@@ -187,6 +193,11 @@ namespace WebBrowser
                 {
                     content = content.Substring(0, 30);
                 }
+                else
+                {
+                    int needed = 30 - content.Length;
+                    content = content + space.Substring(0, needed);
+                }
             }
             else
             {
@@ -217,12 +228,12 @@ namespace WebBrowser
                 }
             }
 
-            
-            
+
+
             Button favoriteButton = new Button
             {
                 Content = content,
-                Tag = uri
+                Tag = uri,
             };
 
             
@@ -270,24 +281,16 @@ namespace WebBrowser
             String text = SearchBar.Text.Trim();
             if (e.Key == Windows.System.VirtualKey.Enter)
             {
-
-                if (!text.StartsWith("https://"))
+                try
                 {
+                    text = text.Insert(0,"https://www.");
+                    wvMain.Source = new Uri(text);
+                }
+                catch (Exception ex)
+                {
+                    //text = text.Substring(8);
                     string googleSearchUrl = "https://www.google.com/search?q=" + Uri.EscapeDataString(text);
                     wvMain.Source = new Uri(googleSearchUrl);
-                }
-                else 
-                {
-                    try
-                    {
-                        wvMain.Source = new Uri(text);
-                    }
-                    catch (Exception ex)
-                    {
-                        text = text.Substring(8);
-                        string googleSearchUrl = "https://www.google.com/search?q=" + Uri.EscapeDataString(text);
-                        wvMain.Source = new Uri(googleSearchUrl);
-                    }
                 }
                 prevText = SearchBar.Text;
                 SearchBar.Text = "";

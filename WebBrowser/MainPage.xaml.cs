@@ -34,6 +34,7 @@ namespace WebBrowser
         public Uri uri = new System.Uri("https://google.com");
         public String prevText = "";
         public String space = "                                                                        ";
+        public double currentZoomFactor = 1.0;
 
         DispatcherTimer dt = new DispatcherTimer();
         public MainPage()
@@ -46,12 +47,48 @@ namespace WebBrowser
             dt.Start();
 
             InitializeWebView();
+            this.KeyDown += MainPage_KeyDown;
         }
 
         private async void InitializeWebView()
         {
             await wvMain.EnsureCoreWebView2Async();
             wvMain.CoreWebView2.NavigationCompleted += WvMain_NavigationCompleted;
+        }
+
+        private void MainPage_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            // Check for '+' key (Key code 187) and '-' key (Key code 189)
+            if (e.Key == Windows.System.VirtualKey.Divide) 
+            {
+                if (SearchBar.IsEnabled && SearchBar.Visibility == Visibility.Visible)
+                {
+                    SearchBar.Focus(FocusState.Programmatic);
+                }
+            }
+            if (e.Key == Windows.System.VirtualKey.Add) // '+' key
+            {
+                ZoomIn();
+            }
+            else if (e.Key == Windows.System.VirtualKey.Subtract) // '-' key
+            {
+                ZoomOut();
+            }
+        }
+
+        private async void ZoomIn()
+        {
+            currentZoomFactor += 0.1; // Increase zoom by 10%
+            await wvMain.CoreWebView2.ExecuteScriptAsync($"document.body.style.zoom='{currentZoomFactor}'");
+        }
+
+        private async void ZoomOut()
+        {
+            if (currentZoomFactor > 0.1) // Prevent zooming out too much
+            {
+                currentZoomFactor -= 0.1; // Decrease zoom by 10%
+                await wvMain.CoreWebView2.ExecuteScriptAsync($"document.body.style.zoom='{currentZoomFactor}'");
+            }
         }
 
         private void WvMain_NavigationCompleted(CoreWebView2 sender, CoreWebView2NavigationCompletedEventArgs args)
@@ -281,14 +318,20 @@ namespace WebBrowser
             String text = SearchBar.Text.Trim();
             if (e.Key == Windows.System.VirtualKey.Enter)
             {
-                try
+                if (text.Contains("."))
                 {
-                    text = text.Insert(0,"https://www.");
-                    wvMain.Source = new Uri(text);
+                    try
+                    {
+                        wvMain.Source = new Uri("https://www." + text);
+                    }
+                    catch (Exception ex)
+                    {
+                        string googleSearchUrl = "https://www.google.com/search?q=" + Uri.EscapeDataString(text);
+                        wvMain.Source = new Uri(googleSearchUrl);
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    //text = text.Substring(8);
                     string googleSearchUrl = "https://www.google.com/search?q=" + Uri.EscapeDataString(text);
                     wvMain.Source = new Uri(googleSearchUrl);
                 }

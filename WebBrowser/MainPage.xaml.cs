@@ -55,16 +55,30 @@ namespace WebBrowser
             await wvMain.EnsureCoreWebView2Async();
             wvMain.CoreWebView2.NavigationCompleted += WvMain_NavigationCompleted;
         }
+        
+
+        private void ShowErrorMessage(string message)
+        {
+            // Display the error message in a UI element, e.g., a TextBlock
+            tbErrorMessage.Text = message;
+            tbErrorMessage.Visibility = Visibility.Visible;
+        }
 
         private void MainPage_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            // Check for '+' key (Key code 187) and '-' key (Key code 189)
-            if (e.Key == Windows.System.VirtualKey.Divide) 
+            if (e.Key == Windows.System.VirtualKey.Tab) 
             {
-                if (SearchBar.IsEnabled && SearchBar.Visibility == Visibility.Visible)
+                if (SearchBar.IsEnabled)
                 {
-                    SearchBar.Focus(FocusState.Programmatic);
+                    SearchBar.Focus(FocusState.Keyboard);
                 }
+                //SearchBar.Text = " ";
+                Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                {
+                    SearchBar.SelectAll();
+                });
+
+                e.Handled = true;
             }
             if (e.Key == Windows.System.VirtualKey.Add) // '+' key
             {
@@ -95,6 +109,7 @@ namespace WebBrowser
         {
             if (args.IsSuccess)
             {
+                tbErrorMessage.Visibility = Visibility.Collapsed;
                 Uri currentUri = new Uri(sender.Source);
                 if (!history.Contains(currentUri))
                 {
@@ -377,4 +392,5 @@ namespace WebBrowser
             SearchBar.Text = prevText;
         }
     }
+
 }

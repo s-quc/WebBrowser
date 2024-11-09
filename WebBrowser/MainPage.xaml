@@ -7,7 +7,8 @@
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
    mc:Ignorable="d"
-   Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+   Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+   KeyDown="MainPage_KeyDown">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -56,6 +57,7 @@
         <StackPanel x:Name="FavoritesStack" Grid.Column="2" Margin="390,143,62,0" Orientation="Vertical"/>
         <StackPanel x:Name="RemoveStack" Grid.Column="2" Margin="297,143,131,0" Orientation="Vertical"/>
         <TextBlock x:Name="tbTime" Grid.Column="2" HorizontalAlignment="Left" Margin="10,45,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="24" FocusVisualPrimaryBrush="#E4DC4F4F" Foreground="#FF6ECC6B"/>
+        <TextBlock x:Name="tbErrorMessage" Grid.Column="2" HorizontalAlignment="Left" Margin="10,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="Red" Visibility="Collapsed"/>
         <StackPanel x:Name="spHistory" Grid.Column="2" Margin="20,143,403,0"/>
         <Button x:Name="bRefreshHist" Grid.Column="2" Content="Refresh History" Margin="10,99,0,0" VerticalAlignment="Top" Click="bRefreshHist_Click">
             <Button.Background>

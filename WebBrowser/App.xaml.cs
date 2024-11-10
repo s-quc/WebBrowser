@@ -3,10 +3,11 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
-using Windows.UI.Core;  // Ensure this is included
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using System.Diagnostics;
 
 namespace WebBrowser
 {
@@ -46,52 +47,62 @@ namespace WebBrowser
             }
 
             // Subscribe to window close event to show confirmation dialog
-            Window.Current.Closed += Current_Closed;
+            Window.Current.Closed += OnWindowClosed;
         }
 
-        private async void Current_Closed(object sender, CoreWindowEventArgs e)
+        private async void OnWindowClosed(object sender, CoreWindowEventArgs e)
         {
-            // Show confirmation dialog before exiting
-            ContentDialogResult result = await ShowExitConfirmationDialogAsync();
+            Debug.WriteLine("Window close event triggered.");
 
-            if (result == ContentDialogResult.Primary) // User clicked "Yes"
+            try
             {
-                Application.Current.Exit(); // Exit the application
+                // Show the exit confirmation dialog
+                ContentDialogResult result = await ShowExitConfirmationDialogAsync();
+
+                Debug.WriteLine("Dialog result: " + result.ToString());
+
+                // If "Yes" is clicked, exit the application; otherwise, cancel the close
+                if (result == ContentDialogResult.Primary)
+                {
+                    Debug.WriteLine("Exiting the app...");
+                    Application.Current.Exit(); // Exit the app
+                }
+                else
+                {
+                    Debug.WriteLine("Canceling close action.");
+                    e.Handled = true; // Prevent the app from closing (cancel the close)
+                }
             }
-            else
+            catch (Exception ex)
             {
-                e.Handled = true; // Cancel the close event if "No" is clicked
+                // Log any exceptions that may be causing the issue
+                Debug.WriteLine("Error during exit confirmation: " + ex.Message);
+                e.Handled = false; // Make sure the close event happens if there's an error
             }
         }
-
-        /*private async void CoreWindow_Closed(CoreWindow sender, CoreWindowEventArgs args)
-        {
-            // Show confirmation dialog before exiting
-            ContentDialogResult result = await ShowExitConfirmationDialogAsync();
-
-            if (result == ContentDialogResult.Primary) // User clicked "Yes"
-            {
-                Application.Current.Exit(); // Exit the application
-            }
-            else
-            {
-                args.Handled = true; // Cancel close event if "No" is clicked
-            }
-        }*/
 
         private async Task<ContentDialogResult> ShowExitConfirmationDialogAsync()
         {
-            // Create and configure the confirmation dialog
-            ContentDialog exitDialog = new ContentDialog
+            try
             {
-                Title = "Are you sure?",
-                Content = "Do you really want to exit the app?",
-                PrimaryButtonText = "Yes",
-                SecondaryButtonText = "No",
-                DefaultButton = ContentDialogButton.Secondary // Default to "No"
-            };
+                // Create and configure the confirmation dialog
+                ContentDialog exitDialog = new ContentDialog
+                {
+                    Title = "Are you sure?",
+                    Content = "Do you really want to exit the app?",
+                    PrimaryButtonText = "Yes",
+                    SecondaryButtonText = "No",
+                    DefaultButton = ContentDialogButton.Secondary // Default to "No"
+                };
 
-            return await exitDialog.ShowAsync();
+                return await exitDialog.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if dialog creation fails
+                Debug.WriteLine("Error creating exit dialog: " + ex.Message);
+                throw;  // Rethrow the exception after logging
+            }
         }
 
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)

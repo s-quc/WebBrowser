@@ -46,10 +46,25 @@ namespace WebBrowser
             }
 
             // Subscribe to window close event to show confirmation dialog
-            Window.Current.CoreWindow.Closed += CoreWindow_Closed;
+            Window.Current.Closed += Current_Closed;
         }
 
-        private async void CoreWindow_Closed(CoreWindow sender, CoreWindowEventArgs args)
+        private async void Current_Closed(object sender, CoreWindowEventArgs e)
+        {
+            // Show confirmation dialog before exiting
+            ContentDialogResult result = await ShowExitConfirmationDialogAsync();
+
+            if (result == ContentDialogResult.Primary) // User clicked "Yes"
+            {
+                Application.Current.Exit(); // Exit the application
+            }
+            else
+            {
+                e.Handled = true; // Cancel the close event if "No" is clicked
+            }
+        }
+
+        /*private async void CoreWindow_Closed(CoreWindow sender, CoreWindowEventArgs args)
         {
             // Show confirmation dialog before exiting
             ContentDialogResult result = await ShowExitConfirmationDialogAsync();
@@ -62,7 +77,7 @@ namespace WebBrowser
             {
                 args.Handled = true; // Cancel close event if "No" is clicked
             }
-        }
+        }*/
 
         private async Task<ContentDialogResult> ShowExitConfirmationDialogAsync()
         {

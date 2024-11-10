@@ -67,7 +67,17 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <TextBox x:Name="SearchBar" HorizontalAlignment="Left" Margin="505,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="622" TextChanged="SearchBar_TextChanged" KeyUp="SearchBar_KeyUp" Grid.ColumnSpan="3"/>
+        <TextBox x:Name="SearchBar" HorizontalAlignment="Left" Margin="505,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="622" TextChanged="SearchBar_TextChanged" KeyUp="SearchBar_KeyUp" Grid.ColumnSpan="3" TabIndex="1"/>
+        <TextBlock x:Name="tbZoomPercentage" Grid.Column="2" HorizontalAlignment="Left" Margin="10,80,0,0" 
+           TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" Foreground="White" />
+        <Button x:Name="btnChangeZoom" Content="Change Zoom" Margin="10,26,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="btnChangeZoom_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3468CE"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <Button x:Name="Refresh" Content="Refresh" Margin="387,26,0,0" VerticalAlignment="Top" Click="Button_Click_2">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

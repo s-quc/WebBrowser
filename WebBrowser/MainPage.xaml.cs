@@ -63,6 +63,57 @@ namespace WebBrowser
             tbErrorMessage.Text = message;
             tbErrorMessage.Visibility = Visibility.Visible;
         }
+        private async void btnChangeZoom_Click(object sender, RoutedEventArgs e)
+        {
+            // Show a dialog to enter the custom zoom percentage
+            ContentDialog dialog = new ContentDialog
+            {
+                Title = "Enter Zoom Percentage",
+                PrimaryButtonText = "Set Zoom",
+                CloseButtonText = "Cancel",
+                DefaultButton = ContentDialogButton.Primary
+            };
+
+            // Create a TextBox for input
+            TextBox zoomInputBox = new TextBox
+            {
+                Width = 200,
+                PlaceholderText = "Enter Zoom % (e.g., 100, 120)",
+                Text = currentZoomFactor.ToString("F0"), // Show current zoom percentage
+                Margin = new Windows.UI.Xaml.Thickness(20)
+            };
+
+            // Add the TextBox to the ContentDialog
+            dialog.Content = zoomInputBox;
+
+            // Show the dialog and wait for the user to submit or cancel
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                // If the user pressed "Set Zoom", update the zoom factor
+                if (int.TryParse(zoomInputBox.Text, out int zoomPercentage) && zoomPercentage >= 10 && zoomPercentage <= 500)
+                {
+                    SetZoom(zoomPercentage);
+                }
+                else
+                {
+                    // If the input is invalid, show an error message
+                    ShowErrorMessage("Invalid zoom percentage. Please enter a value between 10% and 500%.");
+                }
+            }
+        }
+
+        private async void SetZoom(int zoomPercentage)
+        {
+            currentZoomFactor = zoomPercentage / 100.0; // Convert percentage to decimal (e.g., 100% -> 1.0, 120% -> 1.2)
+            await wvMain.CoreWebView2.ExecuteScriptAsync($"document.body.style.zoom='{currentZoomFactor}'");
+
+            // Optionally, display the current zoom percentage in a TextBlock
+            tbZoomPercentage.Text = $"Current Zoom: {zoomPercentage}%";
+        }
+
+
 
         private void MainPage_KeyDown(object sender, KeyRoutedEventArgs e)
         {

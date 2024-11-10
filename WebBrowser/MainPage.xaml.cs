@@ -15,6 +15,12 @@ using Windows.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Web.WebView2.Core;
+using Windows.Storage;
+using System.Collections.Generic;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.Storage;
+using System.Linq;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -63,6 +69,48 @@ namespace WebBrowser
             tbErrorMessage.Text = message;
             tbErrorMessage.Visibility = Visibility.Visible;
         }
+
+        private void SaveFavorites(List<string> favorites)
+        {
+            var localSettings = ApplicationData.Current.LocalSettings;
+
+            // Convert the list to a comma-separated string
+            string favoritesString = string.Join(",", favorites);
+            localSettings.Values["Favorites"] = favoritesString;
+        }
+
+
+
+        public void UpdateFavoritesUI(List<string> favorites)
+        {
+            // Clear existing favorites UI
+            FavoritesStack.Children.Clear();
+
+            // Create buttons for each favorite and add them to the StackPanel
+            foreach (var favorite in favorites)
+            {
+                Button favoriteButton = new Button
+                {
+                    Content = favorite,
+                    Tag = favorite
+                };
+
+                // When a favorite button is clicked, load the URL in the WebView2 control
+                favoriteButton.Click += (s, e) =>
+                {
+                    wvMain.Source = new Uri(favorite);
+                };
+
+                FavoritesStack.Children.Add(favoriteButton);
+            }
+        }
+        private void SaveFavorites(List<string> favorites)
+        {
+            var localSettings = ApplicationData.Current.LocalSettings;
+            string favoritesString = string.Join(",", favorites);
+            localSettings.Values["Favorites"] = favoritesString;
+        }
+
         private async void btnChangeZoom_Click(object sender, RoutedEventArgs e)
         {
             // Show a dialog to enter the custom zoom percentage
@@ -443,5 +491,12 @@ namespace WebBrowser
             SearchBar.Text = prevText;
         }
     }
+
+    public class Favorite
+    {
+        public string Title { get; set; }
+        public string Url { get; set; }
+    }
+
 
 }

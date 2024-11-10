@@ -8,6 +8,16 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using System.Diagnostics;
+using System.Collections.Generic;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
+using Windows.Storage;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
+using System.Linq;
+using Windows.UI.Core;
+using System.Diagnostics;
 
 namespace WebBrowser
 {
@@ -48,6 +58,26 @@ namespace WebBrowser
 
             // Subscribe to window close event to show confirmation dialog
             Window.Current.Closed += OnWindowClosed;
+        }
+        private List<string> LoadFavorites()
+        {
+            var localSettings = ApplicationData.Current.LocalSettings;
+            if (localSettings.Values.ContainsKey("Favorites"))
+            {
+                string favoritesString = localSettings.Values["Favorites"] as string;
+                if (!string.IsNullOrEmpty(favoritesString))
+                {
+                    return favoritesString.Split(',').ToList();
+                }
+            }
+            return new List<string>();
+        }
+
+        private void SaveFavorites(List<string> favorites)
+        {
+            var localSettings = ApplicationData.Current.LocalSettings;
+            string favoritesString = string.Join(",", favorites);
+            localSettings.Values["Favorites"] = favoritesString;
         }
 
         private async void OnWindowClosed(object sender, CoreWindowEventArgs e)

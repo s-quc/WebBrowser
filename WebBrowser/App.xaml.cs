@@ -27,6 +27,7 @@ namespace WebBrowser
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            LoadFavorites();
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)

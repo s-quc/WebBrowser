@@ -60,6 +60,7 @@ namespace WebBrowser
         {
             await wvMain.EnsureCoreWebView2Async();
             wvMain.CoreWebView2.NavigationCompleted += WvMain_NavigationCompleted;
+            //tbZoomPercentage.Text = $"Current Zoom: {zoomPercentage}%";
         }
         
 
@@ -104,7 +105,7 @@ namespace WebBrowser
                 FavoritesStack.Children.Add(favoriteButton);
             }
         }
-        private void SaveFavorites(List<string> favorites)
+        private void StoreFavorites(List<string> favorites)
         {
             var localSettings = ApplicationData.Current.LocalSettings;
             string favoritesString = string.Join(",", favorites);
@@ -148,6 +149,8 @@ namespace WebBrowser
                 {
                     // If the input is invalid, show an error message
                     ShowErrorMessage("Invalid zoom percentage. Please enter a value between 10% and 500%.");
+
+                    //CHANGE WHERE THE ERROR MESSAGE IS SHOWED
                 }
             }
         }
@@ -261,7 +264,17 @@ namespace WebBrowser
                     content = content.Substring(12);
                 }
             }
-           
+
+            if (content.Length > 30)
+            {
+                content = content.Substring(0, 30);
+            }
+            else
+            {
+                int needed = 30 - content.Length;
+                content = content + space.Substring(0, needed);
+            }
+
             Button historyPage = new Button
             {
                 Content = content,
@@ -406,9 +419,9 @@ namespace WebBrowser
 
             FavoritesStack.Children.Add(favoriteButton);
             RemoveStack.Children.Add(removeButton);
-            
-            
 
+
+            //StoreFavorites(favorites);
         }
 
         private void FavoriteButton_Click(object sender, RoutedEventArgs e)
